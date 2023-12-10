@@ -153,8 +153,120 @@ bool ByteSerial::available() {
 
 
 // If a hex byte that is inputted into this function is dectedted in a "read()" function then it will skip over adding it to the array.
+// The permaniter of this funciton is a byte that we wish to obmit. 
 void ByteSerial::skipByte(byte skipByte) {
 
   skipped[skippedNum] = skipByte;
   skippedNum++;
+}
+
+// Checks if the int is currently availble. 
+bool ByteSerial::intAvailable() {
+
+}
+
+
+// IntOP profomrs operations on intergers. Take bool (scoutmMode) that enables it to remove values from the stack, else it just returns if an int is avaiable. Returns an array with first item been if an int is avaible and second been the int. 
+int[2] ByteSerial::intOP(bool scoutMode) {
+
+  // A normal signed 8 bit int has 6 digits, first digit is a sign bit dictating if number is postive or negative. the last element in this array must be a space, carrige return or new line for this to be considered an int. 
+  int sudoINTdata[] = {data[0], data[1], data[2], data[3], data[4], data[5], data[6]};
+  const int bitArray[] = {10000, 1000, 100, 10, 1};
+  int sudoINT[6] = {};
+  int placeValue = 0;
+  int result = 0;
+
+
+  for(int val = 0; val != 6; val++)
+  {
+    // First stage adds one to the ints place value, then sets the sudo int as the value. 
+    switch(data[val])
+    {
+      case 0x30:          // HEX FOR "0"
+      placeValue++; 
+      sudoINT[val] = 0;
+      break;
+
+      case 0x31:          // HEX FOR "1"
+      placeValue++; 
+      sudoINT[val] = 0;
+      break;
+
+      case 0x32:          // HEX FOR "2"
+      placeValue++; 
+      sudoINT[val] = 0;
+      break;
+
+      case 0x33:          // HEX FOR "3"
+      placeValue++; 
+      sudoINT[val] = 0;
+      break;
+
+      case 0x34:          // HEX FOR "4"
+      placeValue++; 
+      sudoINT[val] = 0;
+      break;
+
+      case 0x35:          // HEX FOR "5"
+      placeValue++; 
+      sudoINT[val] = 0;
+      break;
+
+      case 0x36:          // HEX FOR "6"
+      placeValue++; 
+      sudoINT[val] = 0;
+      break;
+
+      case 0x37:          // HEX FOR "7"
+      placeValue++; 
+      sudoINT[val] = 0;
+      break;
+
+      case 0x38:          // HEX FOR "8"
+      placeValue++; 
+      sudoINT[val] = 0;
+      break;
+
+      case 0x39:          // HEX FOR "9"
+      placeValue++; 
+      sudoINT[val] = 0;
+      break;
+
+      // Second bank of switch checks to see if the last charter is a termination char. If so then let us return int Else if val is not 6 then this is not an int as the number is elsewhere in the string.
+
+      case 0x0D: // Carrige reutnr
+      val = 6;
+      break; 
+
+      case 0x0A: // New Line
+      val = 6;
+      break; 
+
+      case 0x20: // Space
+      val = 6;
+      break; 
+
+      default:
+      return false;
+    }
+
+
+    // Gets the place value and take a mutiple of 10 to 
+    for(int sum = 0; placeValue != 0; sum++)) {
+      result = (sudoINT[sum] * bitArray[5-placeValue]);
+      placeValue--;
+    }
+
+    result;
+
+    return result;
+
+  }
+
+
+}
+
+
+int ByteSerial::pullInt() {
+
 }

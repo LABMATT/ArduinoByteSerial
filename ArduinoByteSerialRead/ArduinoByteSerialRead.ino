@@ -28,6 +28,7 @@ void loop() {
 
   // Print out the last byte in our array using a pull command. But only if the data in the array is there.
   if(byteSerial.available()) {
+
     Serial.println(byteSerial.pull()); // Pull the first bytes of the buffer.
   }
   

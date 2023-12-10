@@ -17,6 +17,7 @@ class ByteSerial {
   bool skipCharSpace = false;
 
   void addbyte(byte);
+  int[2] intOP(bool);
 
 
 
@@ -30,5 +31,7 @@ class ByteSerial {
   void skipSpace(bool);
   bool available();
   void skipByte(byte);
+  int pullInt();
+  bool intAvailable();
 
 };
