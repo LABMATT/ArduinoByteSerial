@@ -160,14 +160,21 @@ void ByteSerial::skipByte(byte skipByte) {
   skippedNum++;
 }
 
+
 // Checks if the int is currently availble. 
 bool ByteSerial::intAvailable() {
+
+  // Bool is a pointer that is sent into the function as a pramter as true. If its returned as true then there is a 
+  bool valid = true;
+  ByteSerial::intOP(&valid, false);
+
+  return valid;
 
 }
 
 
 // IntOP profomrs operations on intergers. Take bool (scoutmMode) that enables it to remove values from the stack, else it just returns if an int is avaiable. Returns an array with first item been if an int is avaible and second been the int. 
-int[2] ByteSerial::intOP(bool scoutMode) {
+int ByteSerial::intOP(bool *pValid, bool write) {
 
   // A normal signed 8 bit int has 6 digits, first digit is a sign bit dictating if number is postive or negative. the last element in this array must be a space, carrige return or new line for this to be considered an int. 
   int sudoINTdata[] = {data[0], data[1], data[2], data[3], data[4], data[5], data[6]};
@@ -247,23 +254,27 @@ int[2] ByteSerial::intOP(bool scoutMode) {
       break; 
 
       default:
-      return false;
+      *pValid = false;
     }
 
+    // If we are to return a var then do so via this. 
+    if(write) {
 
-    // Gets the place value and take a mutiple of 10 to 
-    for(int sum = 0; placeValue != 0; sum++)) {
+      // Gets the place value and take a mutiple of 10 to 
+      for(int sum = 0; placeValue != 0; sum++) {
       result = (sudoINT[sum] * bitArray[5-placeValue]);
       placeValue--;
+      }
+      
+      result;
+
+      return result;
+
+    } else 
+    {
+      return 0;
     }
-
-    result;
-
-    return result;
-
   }
-
-
 }
 
 

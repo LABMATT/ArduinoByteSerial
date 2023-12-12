@@ -17,7 +17,7 @@ class ByteSerial {
   bool skipCharSpace = false;
 
   void addbyte(byte);
-  int[2] intOP(bool);
+  int intOP(bool*, bool);
 
 
 
